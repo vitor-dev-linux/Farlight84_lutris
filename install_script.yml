@@ -1,0 +1,91 @@
+description: Client Standalone
+game_slug: farlight-84
+gogslug: ''
+humblestoreid: ''
+installer_slug: farlight-84-standalone
+name: Farlight 84
+notes: "O instalador do jogo pode apresentar algumas falhas. Se voc\xEA receber a\
+  \ mensagem de erro {'utf-8' codec byte} ap\xF3s a instala\xE7\xE3o e encontrar problemas\
+  \ ao tentar ocultar ou fechar o cliente de inicializa\xE7\xE3o antes de jogar, saiba\
+  \ que esses problemas podem ser ignorados. Caso ocorra alguma situa\xE7\xE3o em\
+  \ que o clique do mouse n\xE3o funcione corretamente, basta fechar e abrir o jogo\
+  \ novamente no Lutris para resolver esse problema."
+runner: wine
+script:
+  files:
+  - file1: https://static-gl.lilithgame.com/p/pcsdk/launcher/10060/prodef4621e968ad6b383b8754148b63/0/launcher/res/release/Farlight84_setup_0.1.0.exe
+  game:
+    args: -arg
+    exe: $GAMEDIR/drive_c/Program Files (x86)/Farlight84/Farlight84Launcher.exe
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      name: create_prefix
+      prefix: $GAMEDIR/prefix
+  - task:
+      app: vcrun2010 wininet win7
+      name: winetricks
+      prefix: $GAMEDIR/prefix
+  - task:
+      args: /SP- /SUPPRESSMSGBOXES /VERYSILENT /NOICONS
+      exclude_processes: client.exe
+      executable: $CACHE/file1/Farlight84_setup_0.1.0.exe
+      name: wineexec
+      prefix: $GAMEDIR
+  system:
+    env:
+      DXVK_STATE_CACHE_PATH: $GAMEDIR
+      STAGING_SHARED_MEMORY: 1
+      __GL_DXVK_OPTIMIZATIONS: 1
+      __GL_SHADER_DISK_CACHE: 1
+      __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP: 1
+      __GL_THREADED_OPTIMIZATIONS: 1
+      x3d_platform: 1
+  wine:
+    Audio: pulse
+    fsr: false
+    overrides:
+      wininet: builtin,native
+slug: farlight-84-standalone
+steamid: 1928420
+version: Standalone
+year: 2021
+
+files:
+- file1: https://static-gl.lilithgame.com/p/pcsdk/launcher/10060/prodef4621e968ad6b383b8754148b63/0/launcher/res/release/Farlight84_setup_0.1.0.exe
+game:
+  args: -arg
+  exe: $GAMEDIR/drive_c/Program Files (x86)/Farlight84/Farlight84Launcher.exe
+  prefix: $GAMEDIR
+installer:
+- task:
+    name: create_prefix
+    prefix: $GAMEDIR/prefix
+- task:
+    app: vcrun2010 wininet win7
+    name: winetricks
+    prefix: $GAMEDIR/prefix
+- task:
+    args: /SP- /SUPPRESSMSGBOXES /VERYSILENT /NOICONS
+    exclude_processes: client.exe
+    executable: $CACHE/file1/Farlight84_setup_0.1.0.exe
+    name: wineexec
+    prefix: $GAMEDIR
+system:
+  env:
+    DXVK_STATE_CACHE_PATH: $GAMEDIR
+    STAGING_SHARED_MEMORY: 1
+    __GL_DXVK_OPTIMIZATIONS: 1
+    __GL_SHADER_DISK_CACHE: 1
+    __GL_SHADER_DISK_CACHE_PATH: $GAMEDIR
+    __GL_SHADER_DISK_CACHE_SKIP_CLEANUP: 1
+    __GL_THREADED_OPTIMIZATIONS: 1
+    x3d_platform: 1
+wine:
+  Audio: pulse
+  fsr: false
+  overrides:
+    wininet: builtin,native
+
+# Support  on VitorDevLinux;
